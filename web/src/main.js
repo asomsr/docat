@@ -1,5 +1,6 @@
-import Vue from 'vue'
-import App from '@/App.vue'
+import { createApp } from "vue";
+import { createWebHistory, createRouter } from "vue-router";
+import App from "@/App.vue";
 
 // configure vue material (https://vuematerial.io/getting-started/)
 import {
@@ -15,59 +16,52 @@ import {
   MdProgress,
   MdSnackbar,
   MdIcon,
-  MdTooltip
-} from 'vue-material/dist/components'
-import 'vue-material/dist/vue-material.min.css'
-
-Vue.use(MdApp)
-Vue.use(MdContent)
-Vue.use(MdField)
-Vue.use(MdMenu)
-Vue.use(MdList)
-Vue.use(MdToolbar)
-Vue.use(MdCard)
-Vue.use(MdAvatar)
-Vue.use(MdProgress)
-Vue.use(MdSnackbar)
-Vue.use(MdButton)
-Vue.use(MdIcon)
-Vue.use(MdTooltip)
+  MdTooltip,
+} from "vue-material/dist/components";
+import "vue-material/dist/vue-material.min.css";
 
 // configure to use vue-markdown (https://github.com/miaolz123/vue-markdown)
-import VueMarkdown from 'vue-markdown'
-
-Vue.use(VueMarkdown);
-
-// configure vue router (https://router.vuejs.org/installation.html)
-import VueRouter from 'vue-router'
-
-Vue.use(VueRouter)
+import VueMarkdown from "vue-markdown";
 
 // configure the app's routing
-import Home from '@/pages/Home.vue'
-import Docs from '@/pages/Docs.vue'
-import Help from '@/pages/Help.vue'
-import Upload from '@/pages/Upload.vue'
-import Claim from '@/pages/Claim.vue'
-import Delete from '@/pages/Delete.vue'
+import Home from "@/pages/Home.vue";
+import Docs from "@/pages/Docs.vue";
+import Help from "@/pages/Help.vue";
+import Upload from "@/pages/Upload.vue";
+import Claim from "@/pages/Claim.vue";
+import Delete from "@/pages/Delete.vue";
 
 const routes = [
-  { path: '/', component: Home },
-  { path: '/help', component: Help },
-  { path: '/upload', component: Upload },
-  { path: '/claim', component: Claim },
-  { path: '/delete', component: Delete },
-  { path: '/:project/:version?/:location(.*)?', component: Docs }
-]
+  { path: "/", component: Home },
+  { path: "/help", component: Help },
+  { path: "/upload", component: Upload },
+  { path: "/claim", component: Claim },
+  { path: "/delete", component: Delete },
+  { path: "/:project/:version?/:location(.*)?", component: Docs },
+];
 
-const router = new VueRouter({
-  routes
-})
+const router = createRouter({
+  history: createWebHistory(),
+  routes,
+});
 
 // configure vue
-Vue.config.productionTip = false
+// Vue.config.productionTip = false;
 
-new Vue({
-  router,
-  render: h => h(App)
-}).$mount('#app-container')
+createApp(App)
+  .use(router)
+  .use(MdApp)
+  .use(MdContent)
+  .use(MdField)
+  .use(MdMenu)
+  .use(MdList)
+  .use(MdToolbar)
+  .use(MdCard)
+  .use(MdAvatar)
+  .use(MdProgress)
+  .use(MdSnackbar)
+  .use(MdButton)
+  .use(MdIcon)
+  .use(MdTooltip)
+  .use(VueMarkdown)
+  .mount("#app-container");
